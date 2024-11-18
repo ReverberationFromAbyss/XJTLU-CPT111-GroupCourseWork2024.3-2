@@ -123,13 +123,13 @@ public static Table ConstructTableFromCSV(String src) {
         rows++;
       case ',':
         if (lastSplitor) {
-          ret.SetElement(rows - (c != ',' ? 1 : 0), cols, "");
+          ret.InsertElement(rows - (c != ',' ? 1 : 0), "", true);
           cols++;
         }
         lastSplitor = true;
         break;
       default:
-        ret.SetElement(rows, cols, ParseToken(token));
+        ret.InsertElement(rows, ParseToken(token), true);
         cols++;
         lastSplitor = false;
         break;

@@ -105,6 +105,79 @@ public Table SetElement(int row, int col, String val) throws IndexOutOfBoundsExc
 }
 
 /**
+ * Set the value element that lays on `row' row and `col' column
+ *
+ * @param row    row of the element
+ * @param col    column of the element
+ * @param val    new value for the element
+ * @param expand weather to expand cols and rows to match row and col provided
+ * @return self, for chain-call
+ * @throws IndexOutOfBoundsException if the row or col is out of bound
+ */
+public Table SetElement(int row, int col, String val, boolean expand) throws IndexOutOfBoundsException {
+  if (! expand) {
+    return SetElement(row, col, val);
+  }
+  while (row > m_rows_) {
+    InsertLine();
+  }
+  if (col >= m_columns_) {
+    m_columns_ = col + 1;
+    Sync();
+  }
+  m_table_.get(row)
+          .set(col, val);
+  return this;
+}
+
+/**
+ * Set the value element that lays on `row' row and `col' column
+ *
+ * @param row row of the element
+ * @param val new value for the element
+ * @return self, for chain-call
+ * @throws IndexOutOfBoundsException if the row or col is out of bound
+ */
+public Table InsertElement(int row, String val) throws IndexOutOfBoundsException {
+  while (row > m_rows_) {
+    InsertLine();
+  }
+  if (m_table_.get(row)
+              .size() + 1 > m_columns_) {
+    throw new IndexOutOfBoundsException("Cannot add more Item into the table");
+  }
+  m_table_.get(row)
+          .add(val);
+  return this;
+}
+
+/**
+ * Set the value element that lays on `row' row and `col' column
+ *
+ * @param row    row of the element
+ * @param val    new value for the element
+ * @param expand weather to expand the table
+ * @return self, for chain-call
+ * @throws IndexOutOfBoundsException if the row or col is out of bound
+ */
+public Table InsertElement(int row, String val, boolean expand) throws IndexOutOfBoundsException {
+  if (! expand) {
+    return InsertElement(row, val);
+  }
+  while (row > m_rows_) {
+    InsertLine();
+  }
+  if (m_table_.get(row)
+              .size() + 1 >= m_columns_) {
+    m_columns_ = m_table_.get(row)
+                         .size() + 1;
+  }
+  m_table_.get(row)
+          .add(val);
+  return this;
+}
+
+/**
  * Insert an empty line
  *
  * @return self, for chain-call
