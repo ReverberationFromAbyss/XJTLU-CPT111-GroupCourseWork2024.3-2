@@ -1,4 +1,4 @@
-package CsvUtils;
+package edu.cn.xjtlu.cpt111.cw3.cw3ljfx.CsvUtils;
 
 public class Exceptions {
 public static class IllegalSyntaxException
