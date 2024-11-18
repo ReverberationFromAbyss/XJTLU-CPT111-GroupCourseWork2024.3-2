@@ -13,16 +13,16 @@ public static String GenerateToken(String src) throws NullPointerException {
   if (src == null) {
     throw new NullPointerException("String cannot be null");
   }
-  boolean       hasQuotation  = src.contains("\"");
-  StringBuilder stringBuilder = new StringBuilder().append(hasQuotation ? '"' : "");
+  boolean       needEscape    = src.contains("\"") || src.contains(",") || src.contains("\n") || src.contains("\r");
+  StringBuilder stringBuilder = new StringBuilder().append(needEscape ? '"' : "");
   for (int i = 0; ! src.isEmpty() && i < src.length(); i++) {
     char c = src.charAt(i);
-    if (hasQuotation && c == '"') {
+    if (needEscape && c == '"') {
       stringBuilder.append("\"");
     }
     stringBuilder.append(c);
   }
-  return stringBuilder.append(hasQuotation ? '"' : "")
+  return stringBuilder.append(needEscape ? '"' : "")
                       .toString();
 }
 
