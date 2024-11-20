@@ -91,7 +91,7 @@ public ScoreRecords GetRecords() {
  * @param score New record
  * @return This, for chain-call
  */
-public Users NewRecord(String topic, int score) {
+public Users NewRecord(String topic, Integer score) {
   m_record_.NewRecord(topic, score);
   return this;
 }
