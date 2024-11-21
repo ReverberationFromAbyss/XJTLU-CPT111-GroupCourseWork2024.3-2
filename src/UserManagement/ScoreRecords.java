@@ -1,4 +1,4 @@
-package edu.cn.xjtlu.cpt111.cw3.cw3ljfx.UserManagement;
+package UserManagement;
 
 import java.util.HashMap;
 import java.util.Map;

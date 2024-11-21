@@ -1,6 +1,6 @@
-package edu.cn.xjtlu.cpt111.cw3.cw3ljfx.QuestionManagement;
+package QuestionManagement;
 
-import edu.cn.xjtlu.cpt111.cw3.cw3ljfx.QuestionManagement.Exceptions.NoTopicFoundException;
+import QuestionManagement.Exceptions.NoTopicFoundException;
 import xjtlu.cpt111.assignment.quiz.model.Option;
 import xjtlu.cpt111.assignment.quiz.model.Question;
 import xjtlu.cpt111.assignment.quiz.util.IOUtilities;

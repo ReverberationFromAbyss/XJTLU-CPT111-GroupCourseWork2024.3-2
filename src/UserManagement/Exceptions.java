@@ -1,4 +1,4 @@
-package edu.cn.xjtlu.cpt111.cw3.cw3ljfx.UserManagement;
+package UserManagement;
 
 public class Exceptions {
 public static class ScoreValueOutOfRangeException

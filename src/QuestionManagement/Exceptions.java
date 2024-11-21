@@ -1,4 +1,4 @@
-package edu.cn.xjtlu.cpt111.cw3.cw3ljfx.QuestionManagement;
+package QuestionManagement;
 
 public class Exceptions {
 public static class NoTopicFoundException

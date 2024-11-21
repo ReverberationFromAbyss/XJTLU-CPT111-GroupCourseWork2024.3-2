@@ -1,4 +1,4 @@
-package edu.cn.xjtlu.cpt111.cw3.cw3ljfx.CsvUtils;
+package CsvUtils;
 
 public class CsvWriter {
 

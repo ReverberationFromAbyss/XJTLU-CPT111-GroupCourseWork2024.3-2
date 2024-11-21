@@ -1,16 +1,16 @@
-package edu.cn.xjtlu.cpt111.cw3.cw3ljfx.UserManagement;
+package UserManagement;
 
-import edu.cn.xjtlu.cpt111.cw3.cw3ljfx.CsvUtils.CsvReader;
-import edu.cn.xjtlu.cpt111.cw3.cw3ljfx.CsvUtils.CsvWriter;
-import edu.cn.xjtlu.cpt111.cw3.cw3ljfx.CsvUtils.Exceptions;
-import edu.cn.xjtlu.cpt111.cw3.cw3ljfx.CsvUtils.Table;
+import CsvUtils.CsvReader;
+import CsvUtils.CsvWriter;
+import CsvUtils.Exceptions;
+import CsvUtils.Table;
 
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 
-import static edu.cn.xjtlu.cpt111.cw3.cw3ljfx.UserManagement.Exceptions.DuplicateUserException;
+import static UserManagement.Exceptions.DuplicateUserException;
 
 public class UserManager {
 

@@ -1,8 +1,5 @@
-package edu.cn.xjtlu.cpt111.cw3.cw3ljfx;
-
-import edu.cn.xjtlu.cpt111.cw3.cw3ljfx.CallBackHook.Hook;
-import edu.cn.xjtlu.cpt111.cw3.cw3ljfx.QuestionManagement.QuestionManager;
-import edu.cn.xjtlu.cpt111.cw3.cw3ljfx.UserManagement.UserManager;
+import QuestionManagement.QuestionManager;
+import UserManagement.UserManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,21 +11,21 @@ public class Logical {
 
 private static final Logical s_instance_ = new Logical();
 
-private final UserManager     m_users_        = new UserManager();
-private final QuestionManager m_questions_    = new QuestionManager();
-private final List<Hook>      m_prepareHooks_ = new ArrayList<>();
-private final List<Hook>      m_quitHooks_    = new ArrayList<>();
+private final UserManager             m_users_        = new UserManager();
+private final QuestionManager         m_questions_    = new QuestionManager();
+private final List<CallBackHook.Hook> m_prepareHooks_ = new ArrayList<>();
+private final List<CallBackHook.Hook> m_quitHooks_    = new ArrayList<>();
 
 public static Logical getInstance() {
   return s_instance_;
 }
 
-public Logical RegisterStartupFunctionHook(Hook hook) {
+public Logical RegisterStartupFunctionHook(CallBackHook.Hook hook) {
   m_prepareHooks_.add(hook);
   return this;
 }
 
-public Logical RegisterAfterFunctionHook(Hook hook) {
+public Logical RegisterAfterFunctionHook(CallBackHook.Hook hook) {
   m_quitHooks_.add(hook);
   return this;
 }
