@@ -6,8 +6,7 @@ import edu.cn.xjtlu.cpt111.cw3.cw3ljfx.CsvUtils.Exceptions;
 import edu.cn.xjtlu.cpt111.cw3.cw3ljfx.CsvUtils.Table;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 
@@ -17,6 +16,37 @@ public class UserManager {
 
 private final Set<Users> m_users_ = new HashSet<>();
 
+/**
+ * Extract Records of each user
+ *
+ * @return Topic, ScoreRecords
+ */
+public Map<String, List<ScoreEntry>> GetRecords() {
+  var ret = new HashMap<String, List<ScoreEntry>>();
+  for (var u : m_users_) {
+    for (var t : u.GetRecords()
+                  .GetRecordTopics()) {
+      if (! ret.containsKey(t)) {
+        ret.put(t, new ArrayList<>());
+      }
+      for (var s : u.GetRecords()
+                    .GetRecord(t)) {
+        ret.get(t)
+           .add(new ScoreEntry(u.GetId(), s));
+      }
+    }
+  }
+  return ret;
+}
+
+/**
+ * Load User Account and Score information
+ *
+ * @param infofp  account information file
+ * @param scorefp score record information file
+ * @return self, for chain-call
+ * @throws IOException if file is not readable
+ */
 public UserManager LoadUserInfo(String infofp, String scorefp) throws IOException {
   // Account info
   var file = new File(infofp);
@@ -29,7 +59,7 @@ public UserManager LoadUserInfo(String infofp, String scorefp) throws IOExceptio
     var csv = CsvReader.ConstructTableFromCSV(new String(content));
     LoadAccountInfoFromTable(csv);
   } catch (DuplicateUserException e) {
-    System.err.println(e.getMessage());
+    System.out.println(e.getMessage());
   }
 
   // Score
@@ -43,12 +73,20 @@ public UserManager LoadUserInfo(String infofp, String scorefp) throws IOExceptio
     var csv = CsvReader.ConstructTableFromCSV(new String(content));
     LoadScoreInfoFromTable(csv);
   } catch (DuplicateUserException | NumberFormatException e) {
-    System.err.println(e.getMessage());
+    System.out.println(e.getMessage());
   }
 
   return this;
 }
 
+/**
+ * Save User Account and Score Information to file
+ *
+ * @param infofp  account file path
+ * @param scorefp score record file path
+ * @return self, for chain-call
+ * @throws IOException if file is not writable
+ */
 public UserManager SaveUserInfo(String infofp, String scorefp) throws IOException {
   var file = new File(infofp);
   if (! file.exists() || file.isDirectory()) {
@@ -78,6 +116,13 @@ public UserManager RegisterUser(Users user) {
   return this;
 }
 
+/**
+ * Detect weather ith passwd is matching id
+ *
+ * @param id     id to login
+ * @param passwd passwd
+ * @return null if not matching, user if correct
+ */
 public Users CheckLogin(String id, String passwd) {
   AtomicReference<Users> ret = new AtomicReference<>();
   m_users_.forEach(u -> {
@@ -89,6 +134,14 @@ public Users CheckLogin(String id, String passwd) {
   return ret.get();
 }
 
+/**
+ * Add score record to user
+ *
+ * @param id    user to be added score record
+ * @param topic topic of the record
+ * @param score score of the record
+ * @return self, for chain-call
+ */
 public UserManager AddRecord(String id, String topic, Integer score) {
   m_users_.forEach(u -> {
     if (u.GetId()
@@ -99,6 +152,11 @@ public UserManager AddRecord(String id, String topic, Integer score) {
   return this;
 }
 
+/**
+ * Export Account information to table
+ *
+ * @return account info table
+ */
 public Table ExportAccountInfoToTable() {
   var table = new Table();
   for (var u : m_users_) {
@@ -112,6 +170,12 @@ public Table ExportAccountInfoToTable() {
   return table;
 }
 
+/**
+ * Load Account info from table
+ *
+ * @param table account info table
+ * @return self, for chain-call
+ */
 public UserManager LoadAccountInfoFromTable(Table table) {
   for (var l : table.GetTable()) {
     if (l.length <= 0) {
@@ -126,6 +190,12 @@ public UserManager LoadAccountInfoFromTable(Table table) {
   return this;
 }
 
+/**
+ * Load score info from table
+ *
+ * @param table score info table
+ * @return self, for chain-call
+ */
 public UserManager LoadScoreInfoFromTable(Table table) {
   for (var l : table.GetTable()) {
     if (l.length <= 0) {
@@ -148,6 +218,11 @@ public UserManager LoadScoreInfoFromTable(Table table) {
   return this;
 }
 
+/**
+ * Export Score information to table
+ *
+ * @return score info table
+ */
 public Table ExportScoreInfoToTable() {
   var table = new Table();
   for (var u : m_users_) {
@@ -166,5 +241,15 @@ public Table ExportScoreInfoToTable() {
     }
   }
   return table;
+}
+
+public static class ScoreEntry {
+  public String  id;
+  public Integer score;
+
+  public ScoreEntry(String id, Integer score) {
+    this.id    = id;
+    this.score = score;
+  }
 }
 }
