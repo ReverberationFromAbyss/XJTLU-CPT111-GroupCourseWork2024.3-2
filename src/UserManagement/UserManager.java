@@ -109,7 +109,8 @@ public UserManager RegisterUser(Users user) {
   m_users_.forEach((x) -> {
     if (user.GetId()
             .equals(x.GetId())) {
-      throw new DuplicateUserException("There exists a user whose id is " + user.GetId());
+      throw new DuplicateUserException(
+          "There exists a user whose id is " + user.GetId());
     }
   });
   m_users_.add(user);
@@ -181,7 +182,8 @@ public UserManager LoadAccountInfoFromTable(Table table) {
     if (l.length <= 0) {
       continue;
     } else if (l.length < 3) {
-      throw new Exceptions.IllegalSyntaxException("The Format of CSV file is not matching.");
+      throw new Exceptions.IllegalSyntaxException(
+          "The Format of CSV file is not matching.");
     }
     RegisterUser(new Users(l[0], l[1], l[2]));
     Logger.getLogger("global")
@@ -201,7 +203,8 @@ public UserManager LoadScoreInfoFromTable(Table table) {
     if (l.length <= 0) {
       continue;
     } else if (l.length < 5) {
-      throw new Exceptions.IllegalSyntaxException("The Format of CSV file is not matching.");
+      throw new Exceptions.IllegalSyntaxException(
+          "The Format of CSV file is not matching.");
     }
     m_users_.stream()
             .filter(x -> x.GetId()
@@ -233,14 +236,35 @@ public Table ExportScoreInfoToTable() {
       table.InsertLine()
            .InsertElement(table.GetRows() - 1, u.GetId(), true)
            .InsertElement(table.GetRows() - 1, t, true)
-           .InsertElement(table.GetRows() - 1, scores[0] == null ? "" : scores[0].toString(), true)
-           .InsertElement(table.GetRows() - 1, scores[1] == null ? "" : scores[1].toString(), true)
-           .InsertElement(table.GetRows() - 1, scores[2] == null ? "" : scores[2].toString(), true);
+           .InsertElement(table.GetRows() - 1,
+                          scores[0] == null ? "" : scores[0].toString(), true)
+           .InsertElement(table.GetRows() - 1,
+                          scores[1] == null ? "" : scores[1].toString(), true)
+           .InsertElement(table.GetRows() - 1,
+                          scores[2] == null ? "" : scores[2].toString(), true);
       Logger.getLogger("global")
             .info("Write one user's score record: id:" + u.GetId());
     }
   }
   return table;
+}
+
+/**
+ * If user whose id is `id' is in the user db
+ *
+ * @param id id of the given user
+ * @return true if it has, otherwise false
+ */
+public boolean HasUser(String id) {
+  boolean has = false;
+  for (var u : m_users_) {
+    if (u.GetId()
+         .equals(id)) {
+      has = true;
+      break;
+    }
+  }
+  return has;
 }
 
 public static class ScoreEntry {

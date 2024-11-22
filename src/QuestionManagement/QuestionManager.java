@@ -6,6 +6,7 @@ import xjtlu.cpt111.assignment.quiz.model.Question;
 import xjtlu.cpt111.assignment.quiz.util.IOUtilities;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Logger;
 
 public class QuestionManager {
@@ -34,8 +35,21 @@ public QuestionManager LoadQuestions(String fp) {
     if (! m_questions_.containsKey(q.getTopic())) {
       m_questions_.put(q.getTopic(), new ArrayList<>());
     }
-    m_questions_.get(q.getTopic())
-                .add(q);
+    AtomicBoolean contains = new AtomicBoolean(false);
+    loop:
+    for (var qi : m_questions_.values()) {
+      for (var qs : qi) {
+        if (qs.getQuestionStatement()
+              .equals(q.getQuestionStatement())) {
+          contains.set(true);
+          break loop;
+        }
+      }
+    }
+    if (! contains.get()) {
+      m_questions_.get(q.getTopic())
+                  .add(q);
+    }
   }
 
   return this;
@@ -50,7 +64,8 @@ public QuestionManager LoadQuestions(String fp) {
  */
 public Question[] GetQuestions(String topic) throws NoTopicFoundException {
   if (! m_questions_.containsKey(topic)) {
-    throw new NoTopicFoundException("No question full into such topic: " + topic);
+    throw new NoTopicFoundException(
+        "No question full into such topic: " + topic);
   }
   return m_questions_.get(topic)
                      .toArray(new Question[0]);

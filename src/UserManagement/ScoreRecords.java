@@ -30,7 +30,8 @@ public ScoreRecords NewRecord(String topic, Integer score) throws Exceptions.Sco
   // Thus if it is larger than max score or less than 0, the score is meaningless
   if (score != null && (score > m_maximScore_ || score < 0)) {
     throw new Exceptions.ScoreValueOutOfRangeException(
-        String.format("Maximum score is %d, while providing %d", m_maximScore_, score));
+        String.format("Maximum score is %d, while providing %d", m_maximScore_,
+                      score));
   }
 
   // If the given is stored
@@ -38,12 +39,11 @@ public ScoreRecords NewRecord(String topic, Integer score) throws Exceptions.Sco
     for (int i = s_MAXIMUM_RECORDS - 1; i > 0; i--) {
       m_scoreRecords_.get(topic)[i] = m_scoreRecords_.get(topic)[i - 1];
     }
-    m_scoreRecords_.get(topic)[0] = score;
   } else {
     // Create and store it to the first slot
     m_scoreRecords_.put(topic, new Integer[s_MAXIMUM_RECORDS]);
-    m_scoreRecords_.get(topic)[0] = score;
   }
+  m_scoreRecords_.get(topic)[0] = score;
 
   return this;
 }

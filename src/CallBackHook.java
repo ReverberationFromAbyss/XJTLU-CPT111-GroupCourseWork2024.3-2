@@ -1,5 +1,5 @@
 public class CallBackHook {
-public interface Hook {
-  boolean Apply(Logical o);
+public interface FunctionHook {
+  void Apply();
 }
 }

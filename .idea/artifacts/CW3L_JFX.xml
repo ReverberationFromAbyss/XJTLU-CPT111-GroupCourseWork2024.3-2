@@ -1,0 +1,29 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="CW3L-JFX">
+    <output-path>$PROJECT_DIR$/out/artifacts/CW3L_JFX</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="Main" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="CW3L_JFX.jar">
+        <element id="module-output" name="CW3L-JFX" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/LoginForm.fxml" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/MainForm.fxml" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/QuizTaking.fxml" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/RankList.fxml" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/Register.fxml" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/UserDashboard.fxml" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/UserHistoryView.fxml" />
+      </element>
+      <element id="library" level="project" name="lib" />
+      <element id="library" level="project" name="xjtlu.cpt111.assignment.quiz.lib-0.0.1" />
+    </root>
+  </artifact>
+</component>
