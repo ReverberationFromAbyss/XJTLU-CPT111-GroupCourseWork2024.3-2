@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 public class Register
     implements Initializable {
 
-private Main alter;
+private Launcher alter;
 
 @FXML
 private Button cancelButton;
@@ -61,7 +61,7 @@ void registerHook(ActionEvent event) {
   }
 }
 
-public void setAlter(Main alter) {
+public void setAlter(Launcher alter) {
   this.alter = alter;
 }
 

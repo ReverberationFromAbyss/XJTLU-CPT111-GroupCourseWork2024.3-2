@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-public class Main
+public class Launcher
     extends Application {
 
 private Stage stage;
@@ -19,7 +19,7 @@ public static void main(String[] args) {
   Controller.getInstance()
             .RegisterStartupFunctionHook(Controller::LoadRequiredInfo)
             .RegisterAfterFunctionHook(Controller::SaveInfo)
-            .StartFunction(() -> Application.launch(Main.class, args));
+            .StartFunction(() -> Application.launch(Launcher.class, args));
 }
 
 @Override
@@ -117,9 +117,9 @@ public void QuizTaking() {
 public Initializable switchScene(String fxmlp) throws Exception {
   FXMLLoader loader = new FXMLLoader();
   InputStream in = Objects.requireNonNull(
-      Main.class.getResourceAsStream(fxmlp));
+      Launcher.class.getResourceAsStream(fxmlp));
   loader.setBuilderFactory(new JavaFXBuilderFactory());
-  loader.setLocation(Objects.requireNonNull(Main.class.getResource(fxmlp)));
+  loader.setLocation(Objects.requireNonNull(Launcher.class.getResource(fxmlp)));
   try {
     AnchorPane page  = loader.load(in);
     Scene      scene = new Scene(page);

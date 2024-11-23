@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 public class UserDashboard
     implements Initializable {
 
-private Main alter;
+private Launcher alter;
 
 @FXML
 private Button historyButton;
@@ -37,7 +37,7 @@ void quizHook(ActionEvent event) {
   alter.QuizTaking();
 }
 
-public void setAlter(Main alter) {
+public void setAlter(Launcher alter) {
   this.alter = alter;
 }
 

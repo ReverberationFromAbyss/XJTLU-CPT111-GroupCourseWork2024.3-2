@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 public class QuizTaking
     implements Initializable {
 
-private Main alter;
+private Launcher alter;
 
 @FXML
 private ListView<String> topicList;
@@ -107,7 +107,7 @@ void backHook(ActionEvent event) {
   alter.UserDashboard();
 }
 
-public void setAlter(Main alter) {
+public void setAlter(Launcher alter) {
   this.alter = alter;
 }
 

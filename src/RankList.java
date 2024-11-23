@@ -14,7 +14,7 @@ public class RankList
 
 @FXML
 public  ListView<String> randList;
-private Main             alter;
+private Launcher         alter;
 
 @FXML
 private Button backButton;
@@ -24,7 +24,7 @@ void BackHook(ActionEvent event) {
   alter.MainForm();
 }
 
-public void setAlter(Main alter) {
+public void setAlter(Launcher alter) {
   this.alter = alter;
 }
 

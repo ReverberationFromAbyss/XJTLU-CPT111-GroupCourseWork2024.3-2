@@ -9,9 +9,9 @@ import java.util.ResourceBundle;
 public class MainForm
     implements Initializable {
 
-private Main   alter;
+private Launcher alter;
 @FXML
-private Button historyButton;
+private Button   historyButton;
 
 @FXML
 private Button loginButton;
@@ -35,7 +35,7 @@ void registerhook(ActionEvent event) {
   alter.Register();
 }
 
-public void setApp(Main alter) {
+public void setApp(Launcher alter) {
   this.alter = alter;
 }
 

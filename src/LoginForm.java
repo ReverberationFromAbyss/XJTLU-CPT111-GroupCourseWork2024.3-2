@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 public class LoginForm
     implements Initializable {
 
-private Main alter;
+private Launcher alter;
 
 @FXML
 private Button cancelButton;
@@ -51,7 +51,7 @@ void LoginHook(ActionEvent event) {
   }
 }
 
-public void setAlter(Main alter) {
+public void setAlter(Launcher alter) {
   this.alter = alter;
 }
 

@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 public class UserHistoryView
     implements Initializable {
 
-private Main alter;
+private Launcher alter;
 
 @FXML
 private Button exitButton;
@@ -25,7 +25,7 @@ void exitHook(ActionEvent event) {
   alter.UserDashboard();
 }
 
-public void setAlter(Main alter) {
+public void setAlter(Launcher alter) {
   this.alter = alter;
 }
 
