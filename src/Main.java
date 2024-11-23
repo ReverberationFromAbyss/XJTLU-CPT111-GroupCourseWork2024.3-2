@@ -2,7 +2,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -30,10 +29,6 @@ public void init() throws Exception {
 @Override
 public void start(Stage primaryStage) throws Exception {
 
-  Parent root = FXMLLoader.load(
-      Objects.requireNonNull(
-          getClass().getClassLoader()
-                    .getResource("MainForm.fxml")));
   primaryStage.setTitle(
       "XJTLU CPT111 Group Course Work 3 for year 2024/2025 Sem.1");
   stage = primaryStage;

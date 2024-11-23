@@ -39,6 +39,8 @@ private String     topic;
 
 @FXML
 void chooseHook(ActionEvent event) {
+
+  // Get choice
   var choices = topicList.getSelectionModel()
                          .getSelectedItems();
   String                 choose = null;
@@ -47,10 +49,11 @@ void chooseHook(ActionEvent event) {
     choose = choices.get(0); // for single selection
   }
 
+  // if questions is null, means it run first time
   if (questions == null && choose != null) {
     questions = Controller.getInstance()
                           .GetQuestions(choose);
-    topic     = choose;
+    topic     = choose;// assign topic
 
     questionStatement.setText(
         questions[currentQuestion].getQuestionStatement());
@@ -110,6 +113,7 @@ public void setAlter(Main alter) {
 @Override
 public void initialize(URL url, ResourceBundle resourceBundle) {
 
+  // Initialize ui, present topic choices
   ObservableList<String> data = FXCollections.observableArrayList();
   data.addAll(Controller.getInstance()
                         .GetQuizTopics());
