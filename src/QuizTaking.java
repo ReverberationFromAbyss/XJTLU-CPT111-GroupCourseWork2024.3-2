@@ -87,6 +87,7 @@ void chooseHook(ActionEvent event) {
     Controller.getInstance()
               .RecoredScore(topic, score);
     topicList.setItems(data);
+    // Add score only once
     currentQuestion++;
     return;
   }
