@@ -64,16 +64,16 @@ public UserManager LoadUserInfo(String infofp, String scorefp) throws IOExceptio
 
   // Score
   file = new File(scorefp);
-  if (! file.exists() || file.isDirectory()) {
-    throw new FileNotFoundException("No such file to be read");
-  }
-  content = new byte[((int)file.length())];
-  try (var inputStream = new FileInputStream(file)) {
-    var v   = inputStream.read(content);
-    var csv = CsvReader.ConstructTableFromCSV(new String(content));
-    LoadScoreInfoFromTable(csv);
-  } catch (DuplicateUserException | NumberFormatException e) {
-    System.out.println(e.getMessage());
+  if (file.exists() && ! file.isDirectory()) {
+    //throw new FileNotFoundException("No such file to be read");
+    content = new byte[((int)file.length())];
+    try (var inputStream = new FileInputStream(file)) {
+      var v   = inputStream.read(content);
+      var csv = CsvReader.ConstructTableFromCSV(new String(content));
+      LoadScoreInfoFromTable(csv);
+    } catch (DuplicateUserException | NumberFormatException e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   return this;
@@ -89,15 +89,17 @@ public UserManager LoadUserInfo(String infofp, String scorefp) throws IOExceptio
  */
 public UserManager SaveUserInfo(String infofp, String scorefp) throws IOException {
   var file = new File(infofp);
-  if (! file.exists() || file.isDirectory()) {
-    throw new FileNotFoundException("No such file to be read");
+  if (file.isDirectory()) {
+    throw new FileNotFoundException(
+        "File cannot be written or have no permission.");
   }
   try (var printer = new PrintWriter(file)) {
     printer.print(CsvWriter.GenerateContent(ExportAccountInfoToTable()));
   }
   file = new File(scorefp);
-  if (! file.exists() || file.isDirectory()) {
-    throw new FileNotFoundException("No such file to be read");
+  if (file.isDirectory()) {
+    throw new FileNotFoundException(
+        "File cannot be written or have no permission.");
   }
   try (var printer = new PrintWriter(file)) {
     printer.print(CsvWriter.GenerateContent(ExportScoreInfoToTable()));

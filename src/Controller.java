@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 public class Controller {
 
 private static final Controller s_instance_ = new Controller();
+// singleton pattern
 
 private final UserManager     m_users_        = new UserManager();
 private final QuestionManager m_questions_    = new QuestionManager();
